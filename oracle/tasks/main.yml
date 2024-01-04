@@ -1,0 +1,56 @@
+---
+# Based on: https://github.com/oracle/oci-ansible-collection/tree/master/samples/compute/always_free_launch_compute_instance
+- name: Launch or teardown a compute instance
+  hosts: localhost
+  collections:
+    - oracle.oci
+  vars:
+    # common networking definitions
+    quad_zero_route: "0.0.0.0/0"
+    TCP_protocol: "6"
+    SSH_port: "22"
+
+    vcn_name: "yaptide"
+    vcn_cidr_block: "10.0.0.0/16"
+    vcn_dns_label: "yaptide"
+
+    ig_name: "yaptide"
+
+    route_table_name: "yaptide"
+    # route all internet access to our Internet Gateway
+    route_table_rules:
+        - cidr_block: "{{ quad_zero_route }}"
+          network_entity_id: "{{ ig_id }}"
+
+    subnet_cidr: "10.0.0.48/28"
+    subnet_name: "yaptide"
+    subnet_dns_label: "yaptide"
+
+    securitylist_name: "myalwaysfreesecuritylist"
+
+    # always free shape
+    instance_shape: "VM.Standard.E2.1.Micro"
+    instance_hostname: "yaptide"
+
+    #########################################
+    # Tenancy specific configuration
+    # *Note* - Override the following variables based on your tenancy
+    # or set a valid value for the corresponding environment variable
+    #########################################
+
+    # TODO in final PR:
+    # instance_compartment: "{{ lookup('env', 'OCI_COMPARTMENT_ID') }}"
+    instance_compartment: "ocid1.tenancy.oc1..aaaaaaaan4p5fcw3tsvuycxhfraxzkmajrvkj2sbedm7prqcrs333xarhkhq"
+
+    # TODO in final PR:
+    # instance_image: "{{ lookup('env', 'OCI_IMAGE_ID') }}"
+    instance_image: "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa3bu75jht762mfvwroa2gdck6boqwyktztyu5dfhftcycucyp63ma"
+
+  tasks:
+    - import_tasks: setup.yml
+      when: mode == "deploy"
+    - import_tasks: deploy.yml
+      when: mode == "deploy"
+    - import_tasks: clean.yml
+      when: mode == "clean"
+

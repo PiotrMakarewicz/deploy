@@ -1,0 +1,95 @@
+- name: Launch an instance
+  oci_compute_instance:
+    availability_domain: "{{ instance_ad }}"
+    compartment_id: "{{ instance_compartment }}"
+    name: "yaptide"
+    source_details:
+      source_type: image
+      image_id: "{{ instance_image }}"
+    shape: "{{ instance_shape }}"
+    create_vnic_details:
+        assign_public_ip: True
+        hostname_label: "{{ instance_hostname }}"
+        subnet_id: "{{ instance_subnet_id }}"
+    metadata:
+        ssh_authorized_keys: "{{ lookup('file',  my_test_public_key ) }}"
+  register: result
+
+- name: Print instance details
+  debug:
+    msg: "Launched a new instance {{ result }}"
+- set_fact:
+    instance_id: "{{result.instance.id }}"
+
+- name: Create a volume
+  oci_blockstorage_volume:
+    availability_domain: "{{ instance_ad }}"
+    compartment_id: "{{ instance_compartment }}"
+    name: yaptide
+    size_in_gbs: 50
+  register: result
+
+- name: Print volume details
+  debug:
+    msg: "Created a new volume {{ result }}"
+- set_fact:
+    volume_id: "{{result.volume.id }}"
+
+- name: Attach volume to new instance
+  oci_compute_volume_attachment:
+    instance_id: "{{ instance_id }}"
+    type: paravirtualized
+    volume_id: "{{ volume_id }}"
+    compartment_id: "{{ instance_compartment }}"
+  register: result
+
+- name: Print volume attachment details
+  debug:
+    msg: "Attached volume to instance {{ result }}"
+- set_fact:
+    volume_attachment_id: "{{result.volume_attachment.id }}"
+
+- name: Get the VNIC attachment details of instance
+  oci_compute_vnic_attachment_facts:
+    compartment_id: "{{ instance_compartment }}"
+    instance_id: "{{ instance_id }}"
+  register: result
+
+- name: Get details of the VNIC
+  oci_network_vnic_facts:
+    id: "{{ result.vnic_attachments[0].vnic_id }}"
+  register: result
+- set_fact:
+    instance_public_ip: "{{result.vnic.public_ip}}"
+
+- name: Print the public ip of the newly launched instance
+  debug:
+    msg: "Public IP of launched instance {{ instance_public_ip }}"
+
+- name: Wait (upto 5 minutes) for port 22 to become open
+  wait_for:
+    port: 22
+    host: '{{ instance_public_ip }}'
+    state: started
+    delay: 10
+  vars:
+    ansible_connection: local
+
+- name: Attempt a ssh connection to the newly launced instance
+  # Use "opc" user as this is an OL image
+  # Disable SSH's strict host key checking just for this one command invocation
+  command: ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -i {{ temp_certificates_path }}/private_key.pem opc@{{ instance_public_ip }} uname -a
+  retries: 3
+  delay: 5
+  register: result
+  until: result.rc == 0
+
+- name: Print SSH response from launched instance
+  debug:
+    msg: "SSH response from instance -> {{ result.stdout_lines }}"
+
+- name: Print the information necessary to connect via SSH
+  debug:
+    msg: "Private key for SSH connection: {{ temp_certificates_path }}/private_key.pem\n
+          SSH command: ssh -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\" -i {{ temp_certificates_path }}/private_key.pem opc@{{ instance_public_ip }}"
+
