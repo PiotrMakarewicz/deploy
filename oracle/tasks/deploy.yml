@@ -17,7 +17,7 @@
     metadata:
         ssh_authorized_keys: "{{ lookup('file',  my_test_public_key ) }}"
   register: result
-  retries: 999999999  # Due to limited capacity in Always Free, we need to wait for an available instance
+  retries: 999999  # Due to limited capacity in Always Free, we need to wait for an available instance
   delay: 0
   until: result is not failed
 
