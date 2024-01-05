@@ -26,10 +26,12 @@
     subnet_name: "yaptide"
     subnet_dns_label: "yaptide"
 
-    securitylist_name: "myalwaysfreesecuritylist"
+    securitylist_name: "yaptide"
 
-    # always free shape
-    instance_shape: "VM.Standard.E2.1.Micro"
+    # always free ARM shape
+    instance_shape: "VM.Standard.A1.Flex"
+    instance_shape_ocpus: 4
+    instance_shape_mem_gbs: 24
     instance_hostname: "yaptide"
 
     #########################################
@@ -39,12 +41,17 @@
     #########################################
 
     # TODO in final PR:
+    # instance_ad: "{{ lookup('env', 'OCI_AVAILABILITY_DOMAIN') }}"
+    instance_ad: "GsXI:EU-FRANKFURT-1-AD-3" # can also select AD-1 or AD-2
+
+    # TODO in final PR:
     # instance_compartment: "{{ lookup('env', 'OCI_COMPARTMENT_ID') }}"
     instance_compartment: "ocid1.tenancy.oc1..aaaaaaaan4p5fcw3tsvuycxhfraxzkmajrvkj2sbedm7prqcrs333xarhkhq"
 
     # TODO in final PR:
     # instance_image: "{{ lookup('env', 'OCI_IMAGE_ID') }}"
-    instance_image: "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa3bu75jht762mfvwroa2gdck6boqwyktztyu5dfhftcycucyp63ma"
+    instance_image: "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaao27f22d7avekl642gfes2ijwezsuupwhtteh4wwyjwwgvyxzlzcq"
+    # This image is Canonical-Ubuntu-22.04-aarch64-2023.10.13-0
 
   tasks:
     - import_tasks: setup.yml

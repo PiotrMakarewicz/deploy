@@ -7,6 +7,9 @@
       source_type: image
       image_id: "{{ instance_image }}"
     shape: "{{ instance_shape }}"
+    shape_config:
+      ocpus: "{{ instance_shape_ocpus }}"
+      memory_in_gbs: "{{ instance_shape_mem_gbs }}"
     create_vnic_details:
         assign_public_ip: True
         hostname_label: "{{ instance_hostname }}"
@@ -14,6 +17,9 @@
     metadata:
         ssh_authorized_keys: "{{ lookup('file',  my_test_public_key ) }}"
   register: result
+  retries: 999999999  # Due to limited capacity in Always Free, we need to wait for an available instance
+  delay: 0
+  until: result is not failed
 
 - name: Print instance details
   debug:
