@@ -50,7 +50,13 @@ oci iam user list
 ansible-playbook oracle/tasks/main.yml -e mode=deploy
 ```
 
-### 7. Teardown an instance
+### 7. Start yaptide on the instance
+
+```bash
+ansible-playbook --inventory environments/oracle/hosts site.yml
+```
+
+### 8. Teardown an instance
 
 TODO FIXME this does not see the necessary variables
 

@@ -16,10 +16,8 @@
         subnet_id: "{{ instance_subnet_id }}"
     metadata:
         ssh_authorized_keys: "{{ lookup('file',  my_test_public_key ) }}"
+    key_by: [compartment_id, availability_domain, display_name]
   register: result
-  retries: 999999  # Due to limited capacity in Always Free, we need to wait for an available instance
-  delay: 0
-  until: result is not failed
 
 - name: Print instance details
   debug:
@@ -55,6 +53,11 @@
 - set_fact:
     volume_attachment_id: "{{result.volume_attachment.id }}"
 
+- name: Print all facts
+  debug:
+    var: hostvars
+
+
 - name: Get the VNIC attachment details of instance
   oci_compute_vnic_attachment_facts:
     compartment_id: "{{ instance_compartment }}"
@@ -82,11 +85,11 @@
     ansible_connection: local
 
 - name: Attempt a ssh connection to the newly launced instance
-  # Use "opc" user as this is an OL image
+  # Use "ubuntu" user as this is an Ubuntu image
   # Disable SSH's strict host key checking just for this one command invocation
-  command: ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -i {{ temp_certificates_path }}/private_key.pem opc@{{ instance_public_ip }} uname -a
-  retries: 3
-  delay: 5
+  command: ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -i {{ ssh_keypair_path }}/private_key.pem ubuntu@{{ instance_public_ip }} uname -a
+  retries: 10
+  delay: 20
   register: result
   until: result.rc == 0
 
@@ -96,6 +99,6 @@
 
 - name: Print the information necessary to connect via SSH
   debug:
-    msg: "Private key for SSH connection: {{ temp_certificates_path }}/private_key.pem\n
-          SSH command: ssh -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\" -i {{ temp_certificates_path }}/private_key.pem opc@{{ instance_public_ip }}"
+    msg: "Private key for SSH connection: {{ ssh_keypair_path }}/private_key.pem\n
+          SSH command: ssh -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\" -i {{ ssh_keypair_path }}/private_key.pem ubuntu@{{ instance_public_ip }}"
 

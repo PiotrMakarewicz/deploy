@@ -16,6 +16,8 @@
 
     ig_name: "yaptide"
 
+    ssh_keypair_path: "~/.ssh/yaptide"
+
     route_table_name: "yaptide"
     # route all internet access to our Internet Gateway
     route_table_rules:
@@ -28,9 +30,8 @@
 
     securitylist_name: "yaptide"
 
-    # always free ARM shape
-    instance_shape: "VM.Standard.A1.Flex"
-    instance_shape_ocpus: 4
+    instance_shape: "VM.Standard3.Flex"
+    instance_shape_ocpus: 1
     instance_shape_mem_gbs: 24
     instance_hostname: "yaptide"
 
@@ -50,8 +51,8 @@
 
     # TODO in final PR:
     # instance_image: "{{ lookup('env', 'OCI_IMAGE_ID') }}"
-    instance_image: "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaao27f22d7avekl642gfes2ijwezsuupwhtteh4wwyjwwgvyxzlzcq"
-    # This image is Canonical-Ubuntu-22.04-aarch64-2023.10.13-0
+    instance_image: "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaltfitzfkiurvghfhzsqlei7mcnrphedsre3qunnoeusstcv2vm4q"
+    # This image is Canonical-Ubuntu-22.04-2023.10.13-0
 
   tasks:
     - import_tasks: setup.yml
@@ -60,4 +61,3 @@
       when: mode == "deploy"
     - import_tasks: clean.yml
       when: mode == "clean"
-
