@@ -10,7 +10,7 @@ instance_egress_security_rules:
     protocol: "6" # TCP
     tcp_options:
       destination_port_range:
-        min: 0
+        min: 1
         max: 65535
   # Allow ICMP connections outside
   - destination: "{{ quad_zero_route }}"
