@@ -5,6 +5,22 @@
 # Apache License v2.0
 # See LICENSE.TXT for details.
 instance_egress_security_rules:
-  # Allow all traffic outside
-  - destination: "{{ quad_zero_route }}"
-    protocol: "0" # All protocols
+  # Allow TCP
+  - source: "{{ quad_zero_route }}"
+    protocol: "6" # TCP
+    tcp_options:
+      destination_port_range:
+        min: 1
+        max: 65535
+
+  # Allow UDP
+  - source: "{{ quad_zero_route }}"
+    protocol: "17" # UDP
+    tcp_options:
+      destination_port_range:
+        min: 1
+        max: 65535
+
+  # ICMP 
+  - source: "{{ quad_zero_route }}"
+    protocol: "1"
