@@ -5,11 +5,14 @@
 # Apache License v2.0
 # See LICENSE.TXT for details.
 instance_egress_security_rules:
-  # Allow ssh connections outside
+  # Allow TCP connections outside
   - destination: "{{ quad_zero_route }}"
-    protocol: "{{ TCP_protocol }}"
+    protocol: "6" # TCP
     tcp_options:
       destination_port_range:
-        min: {{ SSH_port }}
-        max: {{ SSH_port }}
+        min: 0
+        max: 65535
+  # Allow ICMP connections outside
+  - destination: "{{ quad_zero_route }}"
+    protocol: "1" # ICMP
 
