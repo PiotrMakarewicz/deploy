@@ -43,15 +43,15 @@
 
     # TODO in final PR:
     # instance_ad: "{{ lookup('env', 'OCI_AVAILABILITY_DOMAIN') }}"
-    instance_ad: "GsXI:EU-FRANKFURT-1-AD-3" # can also select AD-1 or AD-2
+    instance_ad: "kHMI:EU-FRANKFURT-1-AD-3" # can also select AD-1 or AD-2
 
     # TODO in final PR:
     # instance_compartment: "{{ lookup('env', 'OCI_COMPARTMENT_ID') }}"
-    instance_compartment: "ocid1.tenancy.oc1..aaaaaaaan4p5fcw3tsvuycxhfraxzkmajrvkj2sbedm7prqcrs333xarhkhq"
+    instance_compartment: "ocid1.tenancy.oc1..aaaaaaaaxsclzs4afggrkoumjx2rbvsvx2vdaywovhiwwy6t4y453dcehbcq"
 
     # TODO in final PR:
     # instance_image: "{{ lookup('env', 'OCI_IMAGE_ID') }}"
-    instance_image: "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaltfitzfkiurvghfhzsqlei7mcnrphedsre3qunnoeusstcv2vm4q"
+    instance_image: "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaatk6awqpvv5wvorrfbq5ofesx2bmj22n6gpbkxfvccyaryz2xr34q"
     # This image is Canonical-Ubuntu-22.04-2023.10.13-0
 
   tasks:

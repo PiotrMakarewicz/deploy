@@ -4,7 +4,6 @@
   debug:
     var: hostvars
 
-
 - name: Detach the block volume
   oci_compute_volume_attachment:
     id: "{{ ansible_facts.volume_attachment_id }}"
