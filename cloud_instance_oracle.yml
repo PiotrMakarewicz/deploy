@@ -1,0 +1,5 @@
+- name: Deploy instance needed to run yaptide
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - oracle 
