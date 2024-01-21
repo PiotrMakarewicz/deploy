@@ -6,7 +6,7 @@
 # See LICENSE.TXT for details.
 instance_egress_security_rules:
   # Allow TCP
-  - source: "{{ quad_zero_route }}"
+  - destination: "{{ quad_zero_route }}"
     protocol: "6" # TCP
     tcp_options:
       destination_port_range:
@@ -14,7 +14,7 @@ instance_egress_security_rules:
         max: 65535
 
   # Allow UDP
-  - source: "{{ quad_zero_route }}"
+  - destination: "{{ quad_zero_route }}"
     protocol: "17" # UDP
     udp_options:
       destination_port_range:
@@ -22,5 +22,5 @@ instance_egress_security_rules:
         max: 65535
 
   # ICMP 
-  - source: "{{ quad_zero_route }}"
+  - destination: "{{ quad_zero_route }}"
     protocol: "1"
