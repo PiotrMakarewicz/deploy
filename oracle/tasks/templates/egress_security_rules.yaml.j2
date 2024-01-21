@@ -16,7 +16,7 @@ instance_egress_security_rules:
   # Allow UDP
   - source: "{{ quad_zero_route }}"
     protocol: "17" # UDP
-    tcp_options:
+    udp_options:
       destination_port_range:
         min: 1
         max: 65535
