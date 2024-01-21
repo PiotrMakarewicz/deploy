@@ -48,7 +48,7 @@
 
 # https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_module.html
 - name: Run `docker-compose up` to bring up the frontend
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: '{{ frontend_repo_workdir }}'
 
 # Copy certificates to the yaptide_ui image:
