@@ -85,13 +85,13 @@
   ansible.builtin.debug:
     msg: '{{ backend_add_user_output.stdout_lines }}'
 
-- name: Insert first cluster into database
-  community.docker.docker_container_exec:
-    container: yaptide_flask
-    command: 'python3 yaptide/admin/db_manage.py add-cluster {{ backend_cluster }}'
-    chdir: /usr/local/app/
-  register: backend_add_cluster_output
+#- name: Insert first cluster into database
+#  community.docker.docker_container_exec:
+#    container: yaptide_flask
+#    command: 'python3 yaptide/admin/db_manage.py add-cluster {{ backend_cluster }}'
+#    chdir: /usr/local/app/
+#  register: backend_add_cluster_output
 
-- name: Print output of add-cluster command
-  ansible.builtin.debug:
-    msg: '{{ backend_add_cluster_output.stdout_lines }}'
+#- name: Print output of add-cluster command
+#  ansible.builtin.debug:
+#    msg: '{{ backend_add_cluster_output.stdout_lines }}'
