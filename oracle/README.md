@@ -71,3 +71,5 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
  - Automatically answering YES on accepitng ssh fingerprint on connecting to machine in the site.yml
  - Clean up with proper Ansible fact management
  - Set FQDN automatically
+ - self-signed SSL certificate should not be under version control
+ - change SSL certificate to use the right DNS, not example.com
