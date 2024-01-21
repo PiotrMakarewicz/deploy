@@ -1,2 +1,2 @@
 [yaptide]
-138.2.149.58 ansible_ssh_private_key_file=~/.ssh/yaptide/private_key.pem ansible_user=ubuntu
+130.162.248.82 ansible_ssh_private_key_file=~/.ssh/yaptide/private_key.pem ansible_user=ubuntu
