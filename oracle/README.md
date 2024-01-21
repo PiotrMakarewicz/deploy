@@ -73,3 +73,4 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
  - Set FQDN automatically
  - self-signed SSL certificate should not be under version control
  - change SSL certificate to use the right DNS, not example.com
+ - connect backend with Ares cluster
