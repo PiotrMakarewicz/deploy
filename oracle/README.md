@@ -63,3 +63,11 @@ TODO FIXME this does not see the necessary variables
 ```bash
 ansible-playbook oracle/tasks/main.yml -e mode=clean
 ```
+
+
+
+## To improve
+
+ - Automatically answering YES on accepitng ssh fingerprint on connecting to machine in the site.yml
+ - Clean up with proper Ansible fact management
+ - Set FQDN automatically
