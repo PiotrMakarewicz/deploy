@@ -4,7 +4,7 @@ frontend_repo_version: master
 ansible_become: false
 
 frontend_backend_hostname: "localhost"
-frontend_backend_url: "https://138.2.153.45:5000"
+frontend_backend_url: "http://138.2.153.45:5000"
 frontend_ui_hostname: "localhost"
 frontend_ui_url: "http://138.2.153.45:80"
 
