@@ -65,6 +65,8 @@ ansible-playbook oracle/tasks/main.yml -e mode=deploy
 ansible-playbook --inventory environments/oracle/hosts site.yml
 ```
 
+### 8,5. SSH to the instance and check the contents of `~/ui/.env` and `~/yaptide/.env`
+
 ### 9. Teardown an instance
 
 TODO FIXME this does not see the necessary variables

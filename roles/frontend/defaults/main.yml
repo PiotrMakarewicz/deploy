@@ -8,9 +8,9 @@ frontend_backend_url: "https://138.2.153.45:5000"
 frontend_ui_hostname: "localhost"
 frontend_ui_url: "http://138.2.153.45:80"
 
-frontend_keycloak_base_url: 'https://sso.pre.plgrid.pl'
-frontend_keycloak_realm: 'PLGrid'
-frontend_keycloak_client_id: 'yaptide-staging'
+frontend_keycloak_base_url: ''
+frontend_keycloak_realm: ''
+frontend_keycloak_client_id: ''
 
 frontend_ssl_crt: "server.crt"
 frontend_ssl_key: "server.key"
