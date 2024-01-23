@@ -5,7 +5,7 @@ backend_password: "password"
 
 backend_cluster: ""
 backend_cert_auth_url: ""
-backend_backend_external_url: "https://138.2.153.45:5000"
+backend_backend_external_url: "https://138.2.153.45:8443"
 backend_keycloak_base_url: ""
 backend_keycloak_realm: ""
 
