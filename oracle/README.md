@@ -92,7 +92,7 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
  - dodać w przeglądarce certyfikat do frontendu i backendu
 
 ## To mention
- - HTTPS forced on calls between front and backend (we want HTTP but app forces HTTPS, which the backend does not listen for)
+ - HTTPS forced on calls between front and backend (we want HTTP but app forces HTTPS, which the backend does not listen for) - attempt: removing `Strict-Transport-Security` from nginx.conf for UI.
 
 
  ## Useful commands
