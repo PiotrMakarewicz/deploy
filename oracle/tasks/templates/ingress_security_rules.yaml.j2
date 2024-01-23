@@ -5,29 +5,13 @@
 # Apache License v2.0
 # See LICENSE.TXT for details.
 instance_ingress_security_rules:
-  # Allow incoming SSH connections
+  # Allow incoming TCP connections
   - source: "{{ quad_zero_route }}"
     protocol: "6" # TCP
     tcp_options:
       destination_port_range:
-        min: {{ SSH_port }}
-        max: {{ SSH_port }}
-
-  # Allow incoming HTTP connections
-  - source: "{{ quad_zero_route }}"
-    protocol: "6" # TCP
-    tcp_options:
-      destination_port_range:
-        min: 80
-        max: 80
-
-  # Allow incoming HTTPS connections
-  - source: "{{ quad_zero_route }}"
-    protocol: "6" # TCP
-    tcp_options:
-      destination_port_range:
-        min: 443
-        max: 443
+        min: 1
+        max: 65535
   # Allow incoming ICMP connections
   - source: "{{ quad_zero_route }}"
     protocol: "1"
