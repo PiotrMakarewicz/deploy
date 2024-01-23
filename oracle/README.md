@@ -90,6 +90,7 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
  - make openstack deploy idempotent so that you do not have to make a new instance if something goes wrong (NEW project for Dr Grzanka?)
 
  - dodać w przeglądarce certyfikat do frontendu i backendu
+ - remove password from branches of yaptide repo
 
 ## To mention
  - HTTPS forced on calls between front and backend (we want HTTP but app forces HTTPS, which the backend does not listen for) - attempt: removing `Strict-Transport-Security` from nginx.conf for UI.
