@@ -4,9 +4,9 @@ frontend_repo_version: master
 ansible_become: false
 
 frontend_backend_hostname: "localhost"
-frontend_backend_url: "89.168.73.251:5000"
+frontend_backend_url: "https://138.2.153.45:5000"
 frontend_ui_hostname: "localhost"
-frontend_ui_url: "89.168.73.251:80"
+frontend_ui_url: "http://138.2.153.45:80"
 
 frontend_keycloak_base_url: 'https://sso.pre.plgrid.pl'
 frontend_keycloak_realm: 'PLGrid'
