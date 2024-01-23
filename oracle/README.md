@@ -76,7 +76,8 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
 
 
 ## To improve
-
+ - set up VSCode editing via SSH
+ - Add another SSH key locally
  - Automatically answering YES on accepitng ssh fingerprint on connecting to machine in the site.yml
  - save IP of the new instance in inventory
  - Clean up with proper Ansible fact management
@@ -84,6 +85,9 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
  - self-signed SSL certificate should not be under version control
  - change SSL certificate to use the right DNS, not example.com
  - connect backend with Ares cluster
+ - make openstack deploy idempotent so that you do not have to make a new instance if something goes wrong (NEW project for Dr Grzanka?)
+
+ - dodać w przeglądarce certyfikat do frontendu i backendu
 
  ## Useful commands
 
