@@ -37,6 +37,12 @@ If this is not working refer to instructions at: https://docs.ansible.com/ansibl
 source ~/lib/oci-ansible-collection/bin/activate
 ```
 
+### 4.5. Install Docker Ansible collection
+
+```bash
+ansible-galaxy collection install community.docker --upgrade
+```
+
 ### 5. Verify you have set up access via OCI CLI
 
 This should print a list of users:
@@ -50,13 +56,16 @@ oci iam user list
 ansible-playbook oracle/tasks/main.yml -e mode=deploy
 ```
 
-### 7. Start yaptide on the instance
+### 7. Change the IP address in `environments/oracle/hosts` to the public IP of the new instance
+
+
+### 8. Start yaptide on the instance
 
 ```bash
 ansible-playbook --inventory environments/oracle/hosts site.yml
 ```
 
-### 8. Teardown an instance
+### 9. Teardown an instance
 
 TODO FIXME this does not see the necessary variables
 
@@ -69,6 +78,7 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
 ## To improve
 
  - Automatically answering YES on accepitng ssh fingerprint on connecting to machine in the site.yml
+ - save IP of the new instance in inventory
  - Clean up with proper Ansible fact management
  - Set FQDN automatically
  - self-signed SSL certificate should not be under version control
