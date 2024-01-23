@@ -5,9 +5,9 @@ backend_password: "password"
 
 backend_cluster: ""
 backend_cert_auth_url: ""
-backend_backend_external_url: "89.168.73.251:5000"
-backend_keycloak_base_url: 'https://sso.pre.plgrid.pl'
-backend_keycloak_realm: 'PLGrid'
+backend_backend_external_url: "144.24.173.148:5000"
+backend_keycloak_base_url: ""
+backend_keycloak_realm: ""
 
 backend_ssl_crt: "server.crt"
 backend_ssl_key: "server.key"

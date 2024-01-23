@@ -56,7 +56,7 @@ oci iam user list
 ansible-playbook oracle/tasks/main.yml -e mode=deploy
 ```
 
-### 7. Change the IP address in `environments/oracle/hosts` to the public IP of the new instance
+### 7. Change the IP address in `environments/oracle/hosts` to the public IP of the new instance and `roles/backend/defaults/main.yml`
 
 
 ### 8. Start yaptide on the instance
@@ -84,3 +84,12 @@ ansible-playbook oracle/tasks/main.yml -e mode=clean
  - self-signed SSL certificate should not be under version control
  - change SSL certificate to use the right DNS, not example.com
  - connect backend with Ares cluster
+
+ ## Useful commands
+
+1. SSH to the deployed instance
+
+```bash
+ssh -i ~/.ssh/yaptide/private_key.pem ubuntu@<server_ip>
+```
+

@@ -72,18 +72,18 @@
     name: 'yaptide_nginx'
     restart: true
 
-- name: Insert a first user into database
-  community.docker.docker_container_exec:
-    container: yaptide_flask
-    command: 'python3 yaptide/admin/db_manage.py add-user admin --password {{ backend_password }}'
-    chdir: /usr/local/app/
-  register: backend_add_user_output
-  retries: 5
-  delay: 5
+# - name: Insert a first user into database
+#   community.docker.docker_container_exec:
+#     container: yaptide_flask
+#     command: 'python3 yaptide/admin/db_manage.py add-user admin --password {{ backend_password }}'
+#     chdir: /usr/local/app/
+#   register: backend_add_user_output
+#   retries: 5
+#   delay: 5
 
-- name: Print output of add-user command
-  ansible.builtin.debug:
-    msg: '{{ backend_add_user_output.stdout_lines }}'
+# - name: Print output of add-user command
+#   ansible.builtin.debug:
+#     msg: '{{ backend_add_user_output.stdout_lines }}'
 
 #- name: Insert first cluster into database
 #  community.docker.docker_container_exec:
